@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>
-			This is a sample
-		</title>
-	</head>
-	<body>
-		<h1>Welcome to HTML</h1>
-		<h2>Welcome to HTML</h2>
-		<img src="Images/image.jfif"><br>
-		<a href="https://google.com">Click here</a>
-		<br><a href="https://iium.edu.my"><img src="Images/image.jfif" alt="Click here"></a>
-	
-		<ul>
-			<li>Coffee</li>
-			<li>Sugar</li>
-			<li>Milk</li>
-		</ul>
+<body>
 
-		<ol>
-			<li>Pre-heat the oven to 220 degrees C</li>
-			<li>Bring a large pot of water to boil</li>
-			<li>Cook the spaghetti</li>
-		</ol>
-	</body>
+<h2>JavaScript Geolocation</h2>
+
+<p>Click the button to get your coordinates.</p>
+
+<button onclick="getLocation()">Try It</button>
+
+<p id="demo"></p>
+<p id="mapholder"></p>
+
+<script>
+const x = document.getElementById("demo");
+const y = document.getElementById("mapholder");
+
+function getLocation() {
+  try {
+    navigator.geolocation.watchPosition(showPosition);
+  } catch {
+    x.innerHTML = err;
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+  
+ let latlon = position.coords.latitude + "," + position.coords.longitude;
+
+  let img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key=YOUR_KEY";
+  
+  document.getElementById("mapholder").innerHTML = "<iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.8321115562158!2d"+position.coords.longitude+"!3d"+position.coords.latitude+"!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x668582eed78e611d!2zM8KwMDgnMjAuNCJOIDEwMcKwNDEnMTIuNyJF!5e0!3m2!1sen!2smy!4v1672715908285!5m2!1sen!2smy' width='600' height='500' style='border:0;' allowfullscreen='' loading='lazy' referrerpolicy='no-referrer-when-downgrade'></iframe>";
+}
+</script>
+
+</body>
 </html>
